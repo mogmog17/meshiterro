@@ -17,6 +17,13 @@ class PostImagesController < ApplicationController
 
   def show
     @post_image = PostImage.find(params[:id])
+    @post_comment = PostComment.new #コメント投稿するためのインスタンス変数を定義
+  end
+  
+  def destroy
+    @post_image = PostImage.find(params[:id]) #削除するPostImageデータ（レコード）を1件取得
+    @post_image.destroy #データ（レコード）を削除
+    redirect_to '/post_images' #投稿一覧画面へリダイレクト  
   end
   
   # 投稿データのストロングパラメータ

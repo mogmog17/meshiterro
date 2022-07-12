@@ -2,6 +2,7 @@ class PostImage < ApplicationRecord
 
   has_one_attached :image #ActiveStoreageに画像を持たせる
   belongs_to :user #ユーザーに属する,1:N の「N」側にあたるモデルに、belongs_to
+  has_many :post_comments, dependent: :destroy #has_manyでPostCommentモデルを複数持つことを表す
   
   def get_image
     if image.attached?
