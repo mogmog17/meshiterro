@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
-    @post_images = @user.post_images #全体の投稿ではなく、個人が投稿したもの全てを表示
+    @post_images = @user.post_images.page(params[:page]) #全体の投稿ではなく、個人が投稿したもの全てを表示
   end
 
   def edit

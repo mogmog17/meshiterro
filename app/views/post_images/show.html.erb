@@ -11,6 +11,19 @@
   <% if @post_image.user == current_user %> <!--もし、投稿者 == 現在ログインしているユーザ だったら-->
    <%= link_to "削除", post_image_path(@post_image), method: :delete %> <!--削除ボタン-->
   <% end %>
+  <% if @post_image.favorited_by?(current_user) %>
+   <p>
+    <%= link_to post_image_favorites_path(@post_image), method: :delete do %>
+      ♥<%= @post_image.favorites.count %> いいね
+    <% end %>
+   </p>
+   <% else %>
+   <p>
+    <%= link_to post_image_favorites_path(@post_image), method: :post do %>
+      ♡<%= @post_image.favorites.count %> いいね
+    <% end %>
+   </p>
+  <% end %>
 </div>
 
 <div>
@@ -23,7 +36,7 @@
     <%= link_to "削除", post_image_post_comment_path(post_comment.post_image,post_comment), method: :delete %>
    <% end %>
   <% end %>
-  
+
 </div>
 <div>
   <%= form_with model: [@post_image, @post_comment] do |f| %> <!--コメントは、post_imageに結びついたpost_commentであるため、インスタンス変数を2つ指定-->
